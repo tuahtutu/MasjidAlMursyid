@@ -1018,7 +1018,7 @@ def imam_schedule_side(request):
     show_modal_success = request.GET.get('status') == 'success'
 
 
-    return render(request, 'imam/Schedule.html', {
+    return render(request, 'imam/schedule.html', {
         'calendar': calendar_data,
         'year': year,
         'month': month,
