@@ -279,7 +279,7 @@ def delete_imam(request, imam_id):
     
 
 def imam_schedule(request):
-    today = date.today()
+    today = timezone.localdate()
     year = int(request.GET.get('year', today.year))
     month = int(request.GET.get('month', today.month))
 
@@ -437,7 +437,7 @@ def delete_muazzin(request, muazzin_id):
         return redirect('muazzin_management')
     
 def muazzin_schedule(request):
-    today = date.today()
+    today = timezone.localdate()
     year = int(request.GET.get('year', today.year))
     month = int(request.GET.get('month', today.month))
 
@@ -565,7 +565,7 @@ def delete_siak(request, siak_id):
         return redirect('siak_management')
 
 def siak_schedule(request):
-    today = date.today()
+    today = timezone.localdate()
     year = int(request.GET.get('year', today.year))
     month = int(request.GET.get('month', today.month))
 
@@ -827,7 +827,7 @@ def delete_khutbah(request, khutbah_id):
 
 #===================REPORT=============
 def admin_attendance_report(request):
-    today = date.today()
+    today = timezone.localdate()
     year = int(request.GET.get('year', today.year))
     month = int(request.GET.get('month', today.month))
     selected_staff_id = request.GET.get('staff_id', '')
@@ -900,7 +900,7 @@ def imam_dashboard(request):
         return redirect('login')
 
     imam = Imam.objects.get(imam_id=imam_id)
-    today = date.today()
+    today = timezone.localdate()
 
     imam_schedule_today = PrayerSchedule.objects.filter(date=today, imam=imam)
 
@@ -947,7 +947,7 @@ def imam_profile(request):
 
     context = {
         'imam': imam,
-        'today': date.today()
+        'today': timezone.localdate()
     }
     return render(request, 'imam/imamProfile.html', context)
 
@@ -955,7 +955,7 @@ def imam_schedule_side(request):
     imam_id = request.session.get('user_id')
     imam = get_object_or_404(Imam, imam_id=imam_id)
 
-    today = date.today()
+    today = timezone.localdate()
     year = int(request.GET.get('year', today.year))
     month = int(request.GET.get('month', today.month))
 
@@ -1093,7 +1093,7 @@ def imam_leave_history(request):
 
 def imam_attendance(request):
     imam_id = request.session.get('user_id')
-    today = date.today()
+    today = timezone.localdate()
     year = int(request.GET.get('year', today.year))
     month = int(request.GET.get('month', today.month))
 
@@ -1154,7 +1154,7 @@ def muazzin_dashboard(request):
         return redirect('login')
 
     muazzin = Muazzin.objects.get(muazzin_id=muazzin_id)
-    today = date.today()
+    today = timezone.localdate()
 
     muazzin_schedule_today = DutySchedule.objects.filter(
        date=today,
@@ -1199,7 +1199,7 @@ def muazzin_profile(request):
 
     context = {
         'muazzin': muazzin,
-        'today': date.today()
+        'today': timezone.localdate()
     }
     return render(request, 'muazzin/muazzinProfile.html', context)
 
@@ -1208,7 +1208,7 @@ def muazzin_schedule_side(request):
     muazzin_id = request.session.get('user_id')
     muazzin = get_object_or_404(Muazzin, muazzin_id=muazzin_id)
 
-    today = date.today()
+    today = timezone.localdate()
     year = int(request.GET.get('year', today.year))
     month = int(request.GET.get('month', today.month))
 
@@ -1328,7 +1328,7 @@ def muazzin_leave_history(request):
 
 def muazzin_attendance(request):
     muazzin_id = request.session.get('user_id')
-    today = date.today()
+    today = timezone.localdate()
     year = int(request.GET.get('year', today.year))
     month = int(request.GET.get('month', today.month))
 
@@ -1394,7 +1394,7 @@ def siak_dashboard(request):
         return redirect('login')
 
     siak = Siak.objects.get(siak_id=siak_id)
-    today = date.today()
+    today = timezone.localdate()
 
     siak_schedule_today = DutySchedule.objects.filter(
     date=today,
@@ -1440,7 +1440,7 @@ def siak_profile(request):
 
     context = {
         'siak': siak,
-        'today': date.today()
+        'today': timezone.localdate()
     }
     return render(request, 'siak/siakProfile.html', context)
 
@@ -1448,7 +1448,7 @@ def siak_schedule_side(request):
     siak_id = request.session.get('user_id')
     siak = get_object_or_404(Siak, siak_id=siak_id)
 
-    today = date.today()
+    today = timezone.localdate()
     year = int(request.GET.get('year', today.year))
     month = int(request.GET.get('month', today.month))
 
@@ -1564,7 +1564,7 @@ def siak_leave_history(request):
 
 def siak_attendance(request):
     siak_id = request.session.get('user_id')
-    today = date.today()
+    today = timezone.localdate()
     year = int(request.GET.get('year', today.year))
     month = int(request.GET.get('month', today.month))
 
@@ -1654,7 +1654,7 @@ def get_solat_api_aladhan():
     }
 
 def jemaah_home(request):
-    today = date.today()
+    today = timezone.localdate()
     solat_times = get_solat_api_aladhan()
 
     prayer_slots = ["Subuh", "Zohor", "Asar", "Maghrib", "Isyak"]
@@ -1708,7 +1708,7 @@ from django.core.mail import send_mail
 
 def send_manual_reminder(request):
     if request.method == 'POST':
-        today = date.today()
+        today = timezone.localdate()
         duties = DutySchedule.objects.filter(date=today)
 
         for duty in duties:
