@@ -1,0 +1,492 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<title>Butiran Khutbah - ImamFlex</title>
+
+<link rel="stylesheet" href="{% static 'css/ImamFlex.css' %}">
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap"
+    rel="stylesheet"
+>
+
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+>
+
+
+<style>
+
+    body {
+        background-color: #0d1b2a;
+        color: white;
+        font-family: 'Poppins', sans-serif;
+        padding: 0;
+        margin: 0;
+    }
+
+
+    /* ================= BUTTON ROW ================= */
+
+    .button-row {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        padding: 30px 0 10px;
+        background: #0d1b2a;
+    }
+
+
+    .back-btn,
+    .pdf-btn,
+    .print-btn {
+
+        background: gold;
+
+        color: #0d1b2a;
+
+        padding: 10px 20px;
+
+        font-size: 0.9rem;
+
+        font-weight: 600;
+
+        border: none;
+
+        border-radius: 30px;
+
+        display: inline-flex;
+
+        align-items: center;
+
+        gap: 8px;
+
+        cursor: pointer;
+
+        text-decoration: none;
+
+        box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+
+        transition: all 0.3s ease;
+    }
+
+
+    .back-btn:hover,
+    .pdf-btn:hover,
+    .print-btn:hover {
+
+        background-color: #ffdb4d;
+
+        transform: translateY(-2px);
+    }
+
+
+    /* ================= DETAIL CARD ================= */
+
+    .khutbah-detail {
+
+        background-color: #1b263b;
+
+        border-left: 8px solid gold;
+
+        padding: 40px 50px;
+
+        border-radius: 12px;
+
+        max-width: 1000px;
+
+        margin: 0 auto 60px;
+
+        box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+    }
+
+
+    h1 {
+        color: gold;
+
+        margin-bottom: 20px;
+
+        font-size: 1.8rem;
+    }
+
+
+    h3 {
+        color: gold;
+
+        margin-top: 30px;
+
+        margin-bottom: 15px;
+    }
+
+
+    .info {
+
+        margin: 10px 0;
+
+        line-height: 1.8;
+
+        font-size: 1rem;
+    }
+
+
+    hr {
+
+        border: 0;
+
+        border-top: 2px solid gold;
+
+        margin: 30px 0;
+    }
+
+
+    /* ================= PDF SECTION ================= */
+
+    .pdf-section {
+
+        margin-top: 25px;
+    }
+
+
+    .pdf-actions {
+
+        display: flex;
+
+        gap: 10px;
+
+        flex-wrap: wrap;
+
+        margin-bottom: 20px;
+    }
+
+
+    .pdf-btn {
+
+        background: gold;
+
+        color: #0d1b2a;
+    }
+
+
+    .pdf-viewer {
+
+        width: 100%;
+
+        height: 700px;
+
+        border: 1px solid rgba(255,215,0,0.25);
+
+        border-radius: 8px;
+
+        background: white;
+
+        overflow: hidden;
+    }
+
+
+    .pdf-viewer iframe {
+
+        width: 100%;
+
+        height: 100%;
+
+        border: none;
+    }
+
+
+    .no-pdf {
+
+        background: rgba(255,255,255,0.05);
+
+        border: 1px solid rgba(255,255,255,0.1);
+
+        padding: 25px;
+
+        border-radius: 8px;
+
+        color: #aaa;
+
+        text-align: center;
+    }
+
+
+    /* ================= PRINT ================= */
+
+    @media print {
+
+        body {
+
+            background: white;
+
+            color: black;
+
+            font-size: 14px;
+        }
+
+
+        .button-row {
+
+            display: none;
+        }
+
+
+        .khutbah-detail {
+
+            border: none;
+
+            box-shadow: none;
+
+            padding: 0;
+
+            max-width: 100%;
+        }
+
+
+        .pdf-viewer {
+
+            height: 1000px;
+        }
+
+    }
+
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 768px) {
+
+        .button-row {
+
+            padding: 20px 15px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .khutbah-detail {
+
+            margin: 0 15px 40px;
+
+            padding: 25px 20px;
+
+            border-left-width: 5px;
+        }
+
+
+        h1 {
+
+            font-size: 1.4rem;
+        }
+
+
+        .pdf-viewer {
+
+            height: 550px;
+        }
+
+    }
+
+</style>
+
+
+</head>
+
+<body>
+
+
+<!-- ================= BUTTONS ================= -->
+
+<div class="button-row">
+
+
+    <a
+        href="{% url 'jemaah_khutbah' %}"
+        class="back-btn"
+    >
+
+        <i class="fas fa-arrow-left"></i>
+
+        Kembali
+
+    </a>
+
+
+    {% if khutbah.pdf_file %}
+
+        <a
+            href="{{ khutbah.pdf_file.url }}"
+            target="_blank"
+            class="pdf-btn"
+        >
+
+            <i class="fas fa-file-pdf"></i>
+
+            Buka PDF
+
+        </a>
+
+    {% endif %}
+
+
+    <button
+        onclick="window.print()"
+        class="print-btn"
+    >
+
+        <i class="fas fa-print"></i>
+
+        Cetak
+
+    </button>
+
+
+</div>
+
+
+<!-- ================= KHUTBAH DETAIL ================= -->
+
+<div class="khutbah-detail">
+
+
+    <h1>
+        {{ khutbah.khutbah_topic }}
+    </h1>
+
+
+    <p class="info">
+
+        <strong>Tarikh:</strong>
+
+        {{ khutbah.date|date:"j F Y" }}
+
+    </p>
+
+
+    {% if khutbah.event_type %}
+
+        <p class="info">
+
+            <strong>Jenis Acara:</strong>
+
+            {{ khutbah.event_type }}
+
+        </p>
+
+    {% endif %}
+
+
+    <p class="info">
+
+        <strong>Khatib:</strong>
+
+        {% if khutbah.khatib %}
+
+            {{ khutbah.khatib.name }}
+
+        {% else %}
+
+            Belum Ditentukan
+
+        {% endif %}
+
+    </p>
+
+
+    <hr>
+
+
+    <!-- ================= PDF ================= -->
+
+    <div class="pdf-section">
+
+
+        <h3>
+
+            <i class="fas fa-file-pdf"></i>
+
+            Kandungan Khutbah
+
+        </h3>
+
+
+        {% if khutbah.pdf_file %}
+
+
+            <div class="pdf-actions">
+
+
+                <a
+                    href="{{ khutbah.pdf_file.url }}"
+                    target="_blank"
+                    class="pdf-btn"
+                >
+
+                    <i class="fas fa-external-link-alt"></i>
+
+                    Buka PDF
+
+                </a>
+
+
+                <a
+                    href="{{ khutbah.pdf_file.url }}"
+                    download
+                    class="pdf-btn"
+                >
+
+                    <i class="fas fa-download"></i>
+
+                    Muat Turun PDF
+
+                </a>
+
+
+            </div>
+
+
+            <div class="pdf-viewer">
+
+                <iframe
+                    src="{{ khutbah.pdf_file.url }}"
+                    title="PDF Khutbah"
+                >
+                </iframe>
+
+            </div>
+
+
+        {% else %}
+
+
+            <div class="no-pdf">
+
+                <i
+                    class="fas fa-file-pdf"
+                    style="font-size:30px; margin-bottom:10px;"
+                ></i>
+
+                <br>
+
+                PDF khutbah belum tersedia.
+
+            </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+</div>
+
+</body>
+
+</html>

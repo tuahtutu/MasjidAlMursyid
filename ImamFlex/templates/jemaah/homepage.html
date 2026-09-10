@@ -1,0 +1,709 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ImamFlex - Laman Jemaah</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Scheherazade&family=Poppins:wght@300;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #0d1b2a, #1b263b);
+      color: white;
+      min-height: 100vh;
+    }
+
+
+    /* =========================
+       HEADER / WELCOME
+    ========================= */
+
+    .header-img {
+      min-height: 360px;
+      background: url("{% static 'masjid.jpeg' %}") no-repeat center/cover;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .header-img::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        rgba(13,27,42,0.65),
+        rgba(13,27,42,0.88)
+      );
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 2;
+      max-width: 850px;
+      padding: 40px 20px;
+    }
+
+    .bismillah {
+      font-family: 'Scheherazade', serif;
+      font-size: 3rem;
+      color: gold;
+      margin-bottom: 10px;
+    }
+
+    .welcome {
+      font-size: 2.3rem;
+      font-weight: 600;
+      margin: 0;
+      color: white;
+    }
+
+    .mosque-name {
+      font-size: 1.4rem;
+      color: gold;
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    .tagline {
+      font-size: 1rem;
+      color: #e5e5e5;
+      margin-top: 15px;
+      line-height: 1.7;
+    }
+
+    .location {
+      margin-top: 18px;
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+
+    .location i {
+      color: gold;
+      margin-right: 6px;
+    }
+
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    .nav {
+      background: #0d1b2a;
+      padding: 14px 30px;
+      display: flex;
+      justify-content: center;
+      gap: 45px;
+      border-bottom: 2px solid gold;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav a {
+      color: #ddd;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .nav a:hover {
+      color: gold;
+    }
+
+    .nav a.active {
+      color: gold;
+    }
+
+
+    /* =========================
+       MAIN CONTENT
+    ========================= */
+
+    .section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 45px 30px 60px;
+    }
+
+    .intro {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .intro h2 {
+      color: gold;
+      margin-bottom: 8px;
+      font-size: 1.8rem;
+    }
+
+    .intro p {
+      color: #ccc;
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+
+    /* =========================
+       GENERAL CARDS
+    ========================= */
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      padding: 28px;
+      border-radius: 14px;
+      margin-bottom: 30px;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,215,0,0.12);
+    }
+
+    .card-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .card-title i {
+      color: gold;
+      font-size: 1.2rem;
+    }
+
+    .card-title h2 {
+      color: gold;
+      margin: 0;
+      font-size: 1.35rem;
+    }
+
+
+    /* =========================
+       WAKTU SOLAT
+    ========================= */
+
+    .solat-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 15px;
+    }
+
+    .solat-card {
+      background: #1b263b;
+      border: 1px solid rgba(255,215,0,0.5);
+      border-radius: 10px;
+      padding: 20px 10px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .solat-card:hover {
+      transform: translateY(-3px);
+      border-color: gold;
+    }
+
+    .solat-card h4 {
+      margin: 0;
+      font-size: 1rem;
+      color: gold;
+      font-weight: 500;
+    }
+
+    .solat-card p {
+      margin: 8px 0 0;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+
+    /* =========================
+       JADUAL PETUGAS
+    ========================= */
+
+    .duty-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 15px;
+    }
+
+    .duty-card {
+      background: #1b263b;
+      border-radius: 10px;
+      padding: 20px;
+      border-left: 3px solid gold;
+      min-width: 0;
+    }
+
+    .duty-card h4 {
+      color: gold;
+      margin: 0 0 12px;
+      font-size: 1.05rem;
+    }
+
+    .duty-card p {
+      margin: 7px 0;
+      color: #ddd;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .duty-card strong {
+      color: white;
+    }
+
+
+    /* =========================
+       NOTIS KHAS
+    ========================= */
+
+    .notice-box {
+      background: #1b263b;
+      border-left: 4px solid gold;
+      border-radius: 8px;
+      padding: 15px 20px;
+      margin-bottom: 10px;
+    }
+
+    .notice-box p {
+      margin: 0;
+      color: #eee;
+      line-height: 1.6;
+    }
+
+    .empty-notice {
+      color: #aaa;
+      font-style: italic;
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    .footer {
+      background: #0d1b2a;
+      padding: 30px 20px;
+      text-align: center;
+      color: #aaa;
+      border-top: 2px solid gold;
+    }
+
+    .footer h4 {
+      color: gold;
+      margin-bottom: 10px;
+    }
+
+    .footer p {
+      margin: 5px 0;
+      font-size: 0.9rem;
+    }
+
+
+    /* =========================
+       LOGIN BUTTON
+    ========================= */
+
+    .login-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: gold;
+      color: #0d1b2a;
+      padding: 11px 18px;
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.85rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      transition: all 0.3s ease;
+      z-index: 999;
+    }
+
+    .login-btn:hover {
+      background-color: #ffcc00;
+      transform: translateY(-2px);
+    }
+
+
+    /* =========================
+       TABLET
+    ========================= */
+
+    @media (max-width: 1000px) {
+
+      .solat-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .duty-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 700px) {
+
+      .welcome {
+        font-size: 1.8rem;
+      }
+
+      .bismillah {
+        font-size: 2.5rem;
+      }
+
+      .solat-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .duty-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav {
+        gap: 20px;
+        padding: 12px;
+        flex-wrap: wrap;
+      }
+
+      .section {
+        padding: 30px 15px 50px;
+      }
+
+    }
+
+
+    /* =========================
+       SMALL MOBILE
+    ========================= */
+
+    @media (max-width: 450px) {
+
+      .header-img {
+        min-height: 320px;
+      }
+
+      .welcome {
+        font-size: 1.6rem;
+      }
+
+      .mosque-name {
+        font-size: 1.2rem;
+      }
+
+      .tagline {
+        font-size: 0.9rem;
+      }
+
+      .solat-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .duty-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .login-btn {
+        bottom: 15px;
+        right: 15px;
+        padding: 9px 14px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<!-- =========================
+     WELCOME HEADER
+========================= -->
+
+<div class="header-img">
+
+  <div class="header-content">
+
+
+<div class="bismillah">
+  بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ
+</div>
+
+<h1 class="welcome">
+  Selamat Datang ke
+</h1>
+
+<div class="mosque-name">
+  Masjid Al-Mursyid
+</div>
+
+<p class="tagline">
+  Laman informasi rasmi untuk jemaah Masjid Al-Mursyid,
+  Guring, Pauh, Arau, Perlis.
+</p>
+
+<div class="location">
+  <i class="fas fa-map-marker-alt"></i>
+  Guring, Pauh, Arau, Perlis
+</div>
+
+
+  </div>
+
+</div>
+
+<!-- =========================
+     NAVIGATION
+========================= -->
+
+<div class="nav">
+
+  <a href="{% url 'jemaah_home' %}" class="active">
+    <i class="fas fa-home"></i>
+    Utama
+  </a>
+
+  <a href="{% url 'jemaah_khutbah' %}">
+    <i class="fas fa-book-open"></i>
+    Khutbah
+  </a>
+
+  <a href="{% url 'ajk_info' %}">
+    <i class="fas fa-users"></i>
+    Pengurusan Masjid
+  </a>
+
+</div>
+
+<!-- =========================
+     MAIN CONTENT
+========================= -->
+
+<div class="section">
+
+  <!-- INTRODUCTION -->
+
+  <div class="intro">
+
+
+<h2>Maklumat Hari Ini</h2>
+
+<p>
+  Semak waktu solat, jadual petugas dan notis terkini
+  Masjid Al-Mursyid.
+</p>
+
+
+  </div>
+
+  <!-- =========================
+       WAKTU SOLAT
+  ========================= -->
+
+  <div class="card">
+
+
+<div class="card-title">
+
+  <i class="fas fa-mosque"></i>
+
+  <h2>
+    Waktu Solat Hari Ini
+  </h2>
+
+</div>
+
+
+<div class="solat-grid">
+
+  <div class="solat-card">
+    <h4>Subuh</h4>
+    <p>{{ solat_times.Subuh }}</p>
+  </div>
+
+  <div class="solat-card">
+    <h4>Zohor</h4>
+    <p>{{ solat_times.Zohor }}</p>
+  </div>
+
+  <div class="solat-card">
+    <h4>Asar</h4>
+    <p>{{ solat_times.Asar }}</p>
+  </div>
+
+  <div class="solat-card">
+    <h4>Maghrib</h4>
+    <p>{{ solat_times.Maghrib }}</p>
+  </div>
+
+  <div class="solat-card">
+    <h4>Isyak</h4>
+    <p>{{ solat_times.Isyak }}</p>
+  </div>
+
+</div>
+
+
+  </div>
+
+  <!-- =========================
+       JADUAL PETUGAS
+  ========================= -->
+
+  <div class="card">
+
+
+<div class="card-title">
+
+  <i class="fas fa-calendar-day"></i>
+
+  <h2>
+    Jadual Petugas Hari Ini
+  </h2>
+
+</div>
+
+
+<div class="duty-grid">
+
+  {% for waktu, jadual in duty_by_prayer.items %}
+
+    <div class="duty-card">
+
+      <h4>
+        <i class="fas fa-clock"></i>
+        {{ waktu }}
+      </h4>
+
+
+      {% if jadual %}
+
+        <p>
+          <strong>Imam:</strong>
+          {{ jadual.imam }}
+        </p>
+
+        <p>
+          <strong>Muazzin:</strong>
+          {{ jadual.muazzin }}
+        </p>
+
+        <p>
+          <strong>Siak:</strong>
+          {{ jadual.siak }}
+        </p>
+
+      {% else %}
+
+        <p>
+          <em>Tiada tugasan</em>
+        </p>
+
+      {% endif %}
+
+    </div>
+
+  {% endfor %}
+
+</div>
+
+
+  </div>
+
+  <!-- =========================
+       NOTIS KHAS
+  ========================= -->
+
+  <div class="card">
+
+
+<div class="card-title">
+
+  <i class="fas fa-bullhorn"></i>
+
+  <h2>
+    Notis Khas
+  </h2>
+
+</div>
+
+
+{% if notices %}
+
+  {% for notice in notices %}
+
+    <div class="notice-box">
+
+      <p>
+        {{ notice.content }}
+      </p>
+
+    </div>
+
+  {% endfor %}
+
+{% else %}
+
+  <p class="empty-notice">
+    Tiada notis khas buat masa ini.
+  </p>
+
+{% endif %}
+
+
+  </div>
+
+</div>
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<div class="footer">
+
+  <h4>
+    Masjid Al-Mursyid
+  </h4>
+
+  <p>
+    Masjid Al Mursyid Guring, Arau, Perlis
+  </p>
+
+  <p>
+    Email: mamgp2021@gmail.com | Tel: 04-9706003
+  </p>
+
+</div>
+
+<!-- =========================
+     LOGIN AJK
+========================= -->
+
+<a href="{% url 'login' %}" class="login-btn">
+
+<i class="fas fa-user-shield"></i>
+Log Masuk AJK
+
+</a>
+
+</body>
+</html>

@@ -1,0 +1,668 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Khutbah - ImamFlex</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Scheherazade&family=Poppins:wght@300;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #0d1b2a, #1b263b);
+      color: white;
+      min-height: 100vh;
+    }
+
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    .header-img {
+      min-height: 360px;
+      background: url("{% static 'masjid.jpeg' %}") no-repeat center/cover;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .header-img::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        rgba(13,27,42,0.65),
+        rgba(13,27,42,0.88)
+      );
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 2;
+      max-width: 850px;
+      padding: 40px 20px;
+    }
+
+    .bismillah {
+      font-family: 'Scheherazade', serif;
+      font-size: 3rem;
+      color: gold;
+      margin-bottom: 10px;
+    }
+
+    .welcome {
+      font-size: 2.3rem;
+      font-weight: 600;
+      margin: 0;
+      color: white;
+    }
+
+    .mosque-name {
+      font-size: 1.4rem;
+      color: gold;
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    .tagline {
+      font-size: 1rem;
+      color: #e5e5e5;
+      margin-top: 15px;
+      line-height: 1.7;
+    }
+
+    .location {
+      margin-top: 18px;
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+
+    .location i {
+      color: gold;
+      margin-right: 6px;
+    }
+
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    .nav {
+      background: #0d1b2a;
+      padding: 14px 30px;
+      display: flex;
+      justify-content: center;
+      gap: 45px;
+      border-bottom: 2px solid gold;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav a {
+      color: #ddd;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .nav a:hover {
+      color: gold;
+    }
+
+    .nav a.active {
+      color: gold;
+    }
+
+
+    /* =========================
+       MAIN SECTION
+    ========================= */
+
+    .section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 45px 30px 60px;
+    }
+
+    .intro {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .intro h2 {
+      color: gold;
+      margin-bottom: 8px;
+      font-size: 1.8rem;
+    }
+
+    .intro p {
+      color: #ccc;
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+
+    /* =========================
+       SECTION CARD
+    ========================= */
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      padding: 28px;
+      border-radius: 14px;
+      margin-bottom: 30px;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,215,0,0.12);
+    }
+
+    .card-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .card-title i {
+      color: gold;
+      font-size: 1.2rem;
+    }
+
+    .card-title h2 {
+      color: gold;
+      margin: 0;
+      font-size: 1.35rem;
+    }
+
+
+    /* =========================
+       KHUTBAH CARD
+    ========================= */
+
+    .khutbah-card {
+      background: #1b263b;
+      border-radius: 10px;
+      padding: 22px;
+      margin-bottom: 15px;
+      border-left: 3px solid gold;
+      transition: 0.3s;
+    }
+
+    .khutbah-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+    }
+
+    .khutbah-card h3 {
+      color: white;
+      font-size: 1.15rem;
+      margin: 0 0 10px;
+      font-weight: 600;
+    }
+
+    .khutbah-card p {
+      margin: 7px 0;
+      color: #ddd;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .khutbah-card strong {
+      color: white;
+    }
+
+    .khutbah-date {
+      color: #aaa !important;
+      font-size: 0.85rem !important;
+    }
+
+    .khutbah-date i {
+      color: gold;
+      margin-right: 5px;
+    }
+
+
+    /* =========================
+       VIEW BUTTON
+    ========================= */
+
+    .btn-action {
+      display: inline-block;
+      margin-top: 12px;
+      background: gold;
+      color: #0d1b2a;
+      padding: 9px 17px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .btn-action:hover {
+      background: #ffcc00;
+      transform: translateY(-2px);
+    }
+
+
+    /* =========================
+       EMPTY MESSAGE
+    ========================= */
+
+    .empty-message {
+      color: #aaa;
+      font-style: italic;
+      margin: 5px 0 0;
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    .footer {
+      background: #0d1b2a;
+      padding: 30px 20px;
+      text-align: center;
+      color: #aaa;
+      border-top: 2px solid gold;
+    }
+
+    .footer h4 {
+      color: gold;
+      margin-bottom: 10px;
+    }
+
+    .footer p {
+      margin: 5px 0;
+      font-size: 0.9rem;
+    }
+
+
+    /* =========================
+       LOGIN BUTTON
+    ========================= */
+
+    .login-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: gold;
+      color: #0d1b2a;
+      padding: 11px 18px;
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.85rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      transition: all 0.3s ease;
+      z-index: 999;
+    }
+
+    .login-btn:hover {
+      background-color: #ffcc00;
+      transform: translateY(-2px);
+    }
+
+
+    /* =========================
+       TABLET
+    ========================= */
+
+    @media (max-width: 800px) {
+
+      .welcome {
+        font-size: 1.8rem;
+      }
+
+      .bismillah {
+        font-size: 2.5rem;
+      }
+
+      .nav {
+        gap: 20px;
+        padding: 12px;
+      }
+
+      .section {
+        padding: 35px 20px 50px;
+      }
+
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 500px) {
+
+      .header-img {
+        min-height: 320px;
+      }
+
+      .welcome {
+        font-size: 1.6rem;
+      }
+
+      .mosque-name {
+        font-size: 1.2rem;
+      }
+
+      .tagline {
+        font-size: 0.9rem;
+      }
+
+      .nav {
+        flex-wrap: wrap;
+      }
+
+      .section {
+        padding: 30px 15px 50px;
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      .khutbah-card {
+        padding: 18px;
+      }
+
+      .khutbah-card h3 {
+        font-size: 1rem;
+      }
+
+      .login-btn {
+        bottom: 15px;
+        right: 15px;
+        padding: 9px 14px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<div class="header-img">
+
+  <div class="header-content">
+
+
+<div class="bismillah">
+  بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ
+</div>
+
+<h1 class="welcome">
+  Khutbah Masjid Al-Mursyid
+</h1>
+
+<div class="mosque-name">
+  Masjid Al-Mursyid
+</div>
+
+<p class="tagline">
+  Koleksi khutbah dan maklumat khatib
+  untuk rujukan jemaah.
+</p>
+
+<div class="location">
+  <i class="fas fa-map-marker-alt"></i>
+  Guring, Pauh, Arau, Perlis
+</div>
+
+
+  </div>
+
+</div>
+
+<!-- =========================
+     NAVIGATION
+========================= -->
+
+<div class="nav">
+
+  <a href="{% url 'jemaah_home' %}">
+    <i class="fas fa-home"></i>
+    Utama
+  </a>
+
+  <a href="{% url 'jemaah_khutbah' %}" class="active">
+    <i class="fas fa-book-open"></i>
+    Khutbah
+  </a>
+
+  <a href="{% url 'ajk_info' %}">
+    <i class="fas fa-users"></i>
+    Pengurusan Masjid
+  </a>
+
+</div>
+
+<!-- =========================
+     MAIN CONTENT
+========================= -->
+
+<div class="section">
+
+  <div class="intro">
+
+
+<h2>Khutbah</h2>
+
+<p>
+  Lihat khutbah yang akan datang dan
+  khutbah yang telah disampaikan di Masjid Al-Mursyid.
+</p>
+
+
+  </div>
+
+  <!-- =========================
+       UPCOMING KHUTBAH
+  ========================= -->
+
+  <div class="card">
+
+
+<div class="card-title">
+
+  <i class="fas fa-calendar-alt"></i>
+
+  <h2>
+    Khutbah Akan Datang
+  </h2>
+
+</div>
+
+
+{% if upcoming_khutbah %}
+
+  {% for khutbah in upcoming_khutbah %}
+
+    <div class="khutbah-card">
+
+      <h3>
+        {{ khutbah.khutbah_topic }}
+      </h3>
+
+      <p class="khutbah-date">
+
+        <i class="far fa-calendar"></i>
+
+        {{ khutbah.date|date:"j F Y" }}
+
+        {% if khutbah.event_type %}
+          &nbsp; | &nbsp;
+          <i class="fas fa-tag"></i>
+          {{ khutbah.event_type }}
+        {% endif %}
+
+      </p>
+
+
+      <p>
+        <strong>Khatib:</strong>
+
+        {% if khutbah.khatib %}
+          {{ khutbah.khatib.name }}
+        {% else %}
+          Belum Ditentukan
+        {% endif %}
+
+      </p>
+
+
+      <a
+        href="{% url 'khutbah_detail' khutbah.khutbah_id %}"
+        class="btn-action"
+      >
+        <i class="fas fa-book-open"></i>
+        Lihat Kandungan
+      </a>
+
+    </div>
+
+  {% endfor %}
+
+{% else %}
+
+  <p class="empty-message">
+    Tiada khutbah akan datang buat masa ini.
+  </p>
+
+{% endif %}
+
+
+  </div>
+
+  <!-- =========================
+       PAST KHUTBAH
+  ========================= -->
+
+  <div class="card">
+
+
+<div class="card-title">
+
+  <i class="fas fa-history"></i>
+
+  <h2>
+    Khutbah Yang Telah Berlalu
+  </h2>
+
+</div>
+
+
+{% if past_khutbah %}
+
+  {% for khutbah in past_khutbah %}
+
+    <div class="khutbah-card">
+
+      <h3>
+        {{ khutbah.khutbah_topic }}
+      </h3>
+
+      <p class="khutbah-date">
+
+        <i class="far fa-calendar"></i>
+
+        {{ khutbah.date|date:"j F Y" }}
+
+      </p>
+
+
+      <p>
+        <strong>Khatib:</strong>
+
+        {% if khutbah.khatib %}
+          {{ khutbah.khatib.name }}
+        {% else %}
+          Tiada Rekod
+        {% endif %}
+
+      </p>
+
+
+      <a
+        href="{% url 'khutbah_detail' khutbah.khutbah_id %}"
+        class="btn-action"
+      >
+        <i class="fas fa-book-open"></i>
+        Lihat Kandungan
+      </a>
+
+    </div>
+
+  {% endfor %}
+
+{% else %}
+
+  <p class="empty-message">
+    Belum ada khutbah lepas direkodkan.
+  </p>
+
+{% endif %}
+
+
+  </div>
+
+</div>
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<div class="footer">
+
+  <h4>
+    Masjid Al-Mursyid
+  </h4>
+
+  <p>
+    Masjid Al Mursyid Guring, Arau, Perlis
+  </p>
+
+  <p>
+    Email: mamgp2021@gmail.com |
+    Tel: 04-9706003
+  </p>
+
+</div>
+
+<!-- =========================
+     LOGIN AJK
+========================= -->
+
+<a href="{% url 'login' %}" class="login-btn">
+
+<i class="fas fa-user-shield"></i>
+Log Masuk AJK
+
+</a>
+
+</body>
+</html>
