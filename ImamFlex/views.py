@@ -725,7 +725,7 @@ def add_khutbah(request):
 
     return render(
         request,
-        'admin/addKhutbah.html',
+        'admin/addkhutbah.html',
         {
             'imams': imams
         }
