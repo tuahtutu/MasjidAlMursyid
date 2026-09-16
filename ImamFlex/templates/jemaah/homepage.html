@@ -289,6 +289,149 @@
 
 
     /* =========================
+       KATA ALU-ALUAN PENGERUSI
+    ========================= */
+
+    .chairman-section {
+      background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.07),
+        rgba(255,255,255,0.025)
+      );
+      border: 1px solid rgba(255,215,0,0.2);
+      border-radius: 18px;
+      padding: 40px;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+    }
+
+    .chairman-header {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .chairman-header h2 {
+      color: gold;
+      font-size: 1.8rem;
+      margin: 0 0 8px;
+    }
+
+    .chairman-header p {
+      color: #aaa;
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    .chairman-content {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 45px;
+      align-items: start;
+    }
+
+    .chairman-photo-wrapper {
+      text-align: center;
+    }
+
+    .chairman-photo {
+      width: 240px;
+      height: 300px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 14px;
+      border: 2px solid rgba(255,215,0,0.7);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+    }
+
+    .chairman-name {
+      margin-top: 15px;
+      color: gold;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .chairman-position {
+      color: #aaa;
+      font-size: 0.85rem;
+      margin-top: 3px;
+    }
+
+    .chairman-message {
+      color: #e5e5e5;
+      font-size: 0.95rem;
+      line-height: 1.9;
+    }
+
+    .chairman-message .arabic {
+      font-family: 'Scheherazade', serif;
+      color: gold;
+      font-size: 2rem;
+      line-height: 1.5;
+      text-align: center;
+      margin-bottom: 5px;
+    }
+
+    .chairman-message .greeting {
+      text-align: center;
+      color: #f0f0f0;
+      margin-bottom: 25px;
+      font-family: 'Scheherazade', serif;
+      font-size: 1.5rem;
+    }
+
+    .chairman-message p {
+      margin: 0 0 18px;
+    }
+
+    .chairman-slogan {
+      margin: 28px 0;
+      padding: 20px 25px;
+      border-top: 1px solid rgba(255,215,0,0.4);
+      border-bottom: 1px solid rgba(255,215,0,0.4);
+      text-align: center;
+    }
+
+    .chairman-slogan .quote {
+      color: gold;
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .chairman-slogan .description {
+      color: #ccc;
+      font-size: 0.9rem;
+      line-height: 1.8;
+      margin-top: 10px;
+    }
+
+    .chairman-closing {
+      margin-top: 25px;
+    }
+
+    .chairman-closing p {
+      margin-bottom: 10px;
+    }
+
+    .chairman-signature {
+      margin-top: 25px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      color: #ccc;
+      line-height: 1.7;
+    }
+
+    .chairman-signature strong {
+      color: gold;
+      font-weight: 600;
+    }
+
+    .chairman-signature span {
+      display: block;
+    }
+
+
+    /* =========================
        FOOTER
     ========================= */
 
@@ -352,6 +495,16 @@
         grid-template-columns: repeat(3, 1fr);
       }
 
+      .chairman-content {
+        grid-template-columns: 220px 1fr;
+        gap: 30px;
+      }
+
+      .chairman-photo {
+        width: 200px;
+        height: 260px;
+      }
+
     }
 
 
@@ -385,6 +538,37 @@
 
       .section {
         padding: 30px 15px 50px;
+      }
+
+      .chairman-section {
+        padding: 28px 20px;
+      }
+
+      .chairman-content {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      .chairman-photo-wrapper {
+        order: 0;
+      }
+
+      .chairman-photo {
+        width: 210px;
+        height: 270px;
+      }
+
+      .chairman-header {
+        margin-bottom: 25px;
+      }
+
+      .chairman-header h2 {
+        font-size: 1.5rem;
+      }
+
+      .chairman-message {
+        font-size: 0.9rem;
+        line-height: 1.8;
       }
 
     }
@@ -425,6 +609,28 @@
         bottom: 15px;
         right: 15px;
         padding: 9px 14px;
+      }
+
+      .chairman-section {
+        padding: 25px 16px;
+        border-radius: 14px;
+      }
+
+      .chairman-photo {
+        width: 180px;
+        height: 235px;
+      }
+
+      .chairman-message .arabic {
+        font-size: 1.7rem;
+      }
+
+      .chairman-message .greeting {
+        font-size: 1.3rem;
+      }
+
+      .chairman-slogan .quote {
+        font-size: 1.1rem;
       }
 
     }
@@ -532,7 +738,6 @@
 
 </div>
 
-
 <div class="solat-grid">
 
   <div class="solat-card">
@@ -582,7 +787,6 @@
 
 </div>
 
-
 <div class="duty-grid">
 
   {% for waktu, jadual in duty_by_prayer.items %}
@@ -593,7 +797,6 @@
         <i class="fas fa-clock"></i>
         {{ waktu }}
       </h4>
-
 
       {% if jadual %}
 
@@ -646,7 +849,6 @@
 
 </div>
 
-
 {% if notices %}
 
   {% for notice in notices %}
@@ -668,6 +870,161 @@
   </p>
 
 {% endif %}
+
+
+  </div>
+
+  <!-- =========================
+       KATA ALU-ALUAN PENGERUSI
+  ========================= -->
+
+  <div class="chairman-section">
+
+
+<div class="chairman-header">
+
+  <h2>
+    <i class="fas fa-comment-dots"></i>
+    Kata Alu-Aluan Pengerusi
+  </h2>
+
+  <p>
+    Masjid Al-Mursyid, Guring, Pauh, Arau, Perlis
+  </p>
+
+</div>
+
+
+<div class="chairman-content">
+
+  <!-- GAMBAR PENGERUSI -->
+
+  <div class="chairman-photo-wrapper">
+
+    <img
+      src="{% static 'pengerusi.jpeg' %}"
+      alt="Pengerusi Masjid Al-Mursyid"
+      class="chairman-photo"
+    >
+
+    <div class="chairman-name">
+      Yang Mulia Pengerusi
+    </div>
+
+    <div class="chairman-position">
+      Masjid Al-Mursyid
+    </div>
+
+  </div>
+
+
+  <!-- TEKS UCAPAN -->
+
+  <div class="chairman-message">
+
+    <div class="arabic">
+      بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ
+    </div>
+
+    <div class="greeting">
+      السلام عليكم ورحمة الله وبركاته
+    </div>
+
+
+    <p>
+      Alhamdulillah, segala puji bagi Allah سبحانه وتعالى.
+      Selawat dan salam ke atas junjungan besar Nabi Muhammad ﷺ,
+      ahli keluarga, para sahabat serta seluruh umat yang mengikuti
+      petunjuk Baginda.
+    </p>
+
+    <p>
+      Selamat datang ke laman web rasmi Masjid Al-Mursyid,
+      Guring, Pauh, Arau, Perlis.
+    </p>
+
+    <p>
+      Laman web ini menjadi salah satu wadah rasmi untuk menghubungkan
+      Masjid Al-Mursyid dengan ahli kariah dan masyarakat. Di sini,
+      para pengunjung dapat mengikuti perkembangan masjid, aktiviti
+      pengimarahan, program keilmuan, kebajikan serta pelbagai inisiatif
+      yang dilaksanakan untuk manfaat bersama.
+    </p>
+
+    <p>
+      Sebagai sebuah institusi masyarakat Islam, Masjid Al-Mursyid
+      beriltizam untuk terus memperkukuhkan peranan masjid sebagai pusat
+      ibadah, ilmu, kebajikan dan penyatuan ummah.
+    </p>
+
+
+    <!-- SLOGAN -->
+
+    <div class="chairman-slogan">
+
+      <div class="quote">
+        “PRIHATIN KARIAH, PENGGERAK UMMAH”
+      </div>
+
+      <div class="description">
+        Slogan ini menjadi teras kepada setiap usaha dan amanah yang
+        dilaksanakan — sentiasa prihatin terhadap keperluan kariah
+        serta bersama-sama menggerakkan ummah menuju kehidupan yang
+        lebih baik, berilmu, berakhlak dan harmoni.
+      </div>
+
+    </div>
+
+
+    <div class="chairman-closing">
+
+      <p>
+        Semoga laman web ini menjadi jambatan yang menghubungkan masjid
+        dengan masyarakat serta membuka lebih banyak ruang untuk kita
+        bersama-sama memakmurkan masjid, memperkukuh ukhuwah dan
+        menyebarkan manfaat.
+      </p>
+
+      <p>
+        Terima kasih atas sokongan dan kepercayaan yang diberikan.
+      </p>
+
+      <p>
+        Semoga setiap usaha yang dilakukan mendapat keberkatan dan
+        keredaan Allah سبحانه وتعالى.
+      </p>
+
+      <p>
+        Masjid Al-Mursyid<br>
+        <strong>Prihatin Kariah, Penggerak Ummah.</strong>
+      </p>
+
+
+      <div class="chairman-signature">
+
+        <span>
+          والسلام عليكم ورحمة الله وبركاته
+        </span>
+
+        <br>
+
+        <strong>Yang Mulia Pengerusi</strong>
+
+        <span>
+          Masjid Al-Mursyid
+        </span>
+
+        <span>
+          Guring, Pauh, Arau, Perlis
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
 
 
   </div>
@@ -701,7 +1058,7 @@
 <a href="{% url 'login' %}" class="login-btn">
 
 <i class="fas fa-user-shield"></i>
-Log Masuk AJK
+Log Masuk Pegawai Masjid
 
 </a>
 
